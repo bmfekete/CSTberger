@@ -3,18 +3,17 @@ project(CSTberger)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin)
-
-if(${CMAKE_HOST_APPLE})
-	include_directories(/sw/include)
-	link_directories(/sw/lib)
-endif(${CMAKE_HOST_APPLE})
-
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
-include_directories(/usr/local/share/ghaas/include)
-link_directories(/usr/local/share/ghaas/lib)
+if(${GHAASDIR})
+    include_directories(${GHAASDIR}/include)
+    link_directories(${GHAASDIR}/lib)
+else(${GHAASDIR})
+    include_directories(/usr/local/share/ghaas/include)
+    link_directories(/usr/local/share/ghaas/lib)
+endif(${GHAASDIR})
 
 FILE(GLOB sources src/*.C)
 
 add_executable(CSTberger ${sources})
-target_link_libraries(CSTberger CM10 m)
+target_link_libraries(CSTberger CM30 m)
+target_include_directories(CSTberger PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+install (TARGETS CSTberger RUNTIME DESTINATION ghaas/bin)
