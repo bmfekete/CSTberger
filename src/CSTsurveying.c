@@ -13,8 +13,8 @@ int main(int argv, char *argc[]) {
         survPoint.Name[i] = '\0';
         for (i = 0; i < 10 && buffer[i + 36] != ' '; ++i) survPoint.Pcode[i] = buffer[i + 36];
         survPoint.Pcode[i] = '\0';
-        memcpy(&(survPoint.X),buffer + 11,sizeof(double));
-        memcpy(&(survPoint.Y),buffer + 19,sizeof(double));
+        memcpy(&(survPoint.Y),buffer + 11,sizeof(double));
+        memcpy(&(survPoint.X),buffer + 19,sizeof(double));
         memcpy(&(survPoint.Z),buffer + 27,sizeof(double));
         printf("\"%s\"\t\"%s\"\t%lf\t%lf\t%lf\n", survPoint.Pcode,survPoint.Name,survPoint.X,survPoint.Y,survPoint.Z);
     }
